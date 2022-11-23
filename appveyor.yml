@@ -60,3 +60,4 @@ after_build:
 artifacts:
   - path: $(package_name).zip
     name: $(arch)
+  - path: '**/*.pdb'
