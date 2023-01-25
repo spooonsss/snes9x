@@ -60,7 +60,7 @@ class ConfigFile {
     bool DeleteSection(const char *section);
     typedef std::vector<std::pair<std::string,std::string> > secvec_t;
     secvec_t GetSection(const char *section);
-    int GetSectionSize(const std::string section);
+    int GetSectionSize(const std::string section) const;
 
 	// Clears all key-value pairs that didn't receive a Set command, or a Get command with autoAdd on
     void ClearUnused(void);
@@ -90,7 +90,7 @@ class ConfigFile {
 		mutable bool used;
 
         struct section_then_key_less {
-            bool operator()(const ConfigEntry &a, const ConfigEntry &b);
+            bool operator()(const ConfigEntry &a, const ConfigEntry &b) const;
         };
 
         struct key_less {
@@ -101,7 +101,7 @@ class ConfigFile {
         };
 
         struct line_less {
-            bool operator()(const ConfigEntry &a, const ConfigEntry &b){
+            bool operator()(const ConfigEntry &a, const ConfigEntry &b) const{
 				if(a.line==b.line) return (b.val.empty() && !a.val.empty()) || a.key<b.key;
                 if(b.line<0) return true;
                 if(a.line<0) return false;
@@ -192,11 +192,11 @@ class ConfigFile {
 		std::map<std::string,uint32> sections;
 
 	  public:
-		uint32 GetSectionSize(const std::string section) {
+		uint32 GetSectionSize(const std::string section) const {
 			uint32 count=0;
 			uint32 seclen;
-			std::map<std::string,uint32>::iterator it;
-			for(it=sections.begin(); it!=sections.end(); it++) {
+			std::map<std::string,uint32>::const_iterator it;
+			for(it=sections.cbegin(); it!=sections.cend(); it++) {
 				seclen = MIN(section.size(),it->first.size());
 				if(it->first==section || !section.compare(0,seclen,it->first,0,seclen)) count+=it->second;
 			}
