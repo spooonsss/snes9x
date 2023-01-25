@@ -189,6 +189,7 @@
     <ClInclude Include="..\sha256.h">
       <Filter>s9x-source</Filter>
     </ClInclude>
+    <ClInclude Include="..\filter\snes_ntsc.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\bsx.cpp">
@@ -356,5 +357,6 @@
     <ClCompile Include="..\sha256.cpp">
       <Filter>s9x-source</Filter>
     </ClCompile>
+    <ClCompile Include="..\filter\snes_ntsc.c" />
   </ItemGroup>
 </Project>
