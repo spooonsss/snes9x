@@ -300,6 +300,12 @@ enum retro_language
 /* Video ram lets a frontend peek into a game systems video RAM (VRAM). */
 #define RETRO_MEMORY_VIDEO_RAM   3
 
+/* BW ram access */
+#define RETRO_MEMORY_SYSTEM_BWRAM 0x2B1D
+
+/* I ram access */
+#define RETRO_MEMORY_SYSTEM_IRAM  0x2B1E
+
 /* Keysyms used for ID in input state callback when polling RETRO_KEYBOARD. */
 enum retro_key
 {

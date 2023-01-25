@@ -1654,6 +1654,12 @@ void* retro_get_memory_data(unsigned type)
         case RETRO_MEMORY_VIDEO_RAM:
         data = Memory.VRAM;
         break;
+        case RETRO_MEMORY_SYSTEM_BWRAM:
+        data = Memory.BWRAM;
+        break;
+        case RETRO_MEMORY_SYSTEM_IRAM:
+        data = Memory.FillRAM + 0x3000; // I-RAM
+        break;
         //case RETRO_MEMORY_ROM:
         //	data = Memory.ROM;
         //	break;
@@ -1688,6 +1694,13 @@ size_t retro_get_memory_size(unsigned type)
         case RETRO_MEMORY_VIDEO_RAM:
             size = 64 * 1024;
             break;
+        case RETRO_MEMORY_SYSTEM_BWRAM:
+            size = 2 * (1<<20) / 8; // BW-RAM 2Mbit max
+            break;
+        case RETRO_MEMORY_SYSTEM_IRAM:
+            size = 16 * (1<<10) / 8; // The I-RAM consists of a 16 Kbit RAM.  0x3000
+            break;
+
         //case RETRO_MEMORY_ROM:
         //	size = Memory.CalculatedSize;
         //	break;
