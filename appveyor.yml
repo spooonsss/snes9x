@@ -57,7 +57,11 @@ after_build:
     copy data\cheats.bml artifacts
   - 7z a %package_name%.zip .\artifacts\*
 
+  - '"C:\Program Files\Git\usr\bin\find.exe"  -iname "*.pdb" -and ! -iname "vc[0-9][0-9].pdb" -and ! -iname "vc[0-9][0-9][0-9].pdb" -exec sha1sum {} +'
+  - sha1sum %package_name%.zip
+  - '"c:\Program Files\7-Zip\7z.exe" a pdbs.7z *.pdb -r -mx=5 -x!vc?0.pdb -x!vc1??.pdb'
+
 artifacts:
   - path: $(package_name).zip
     name: $(arch)
-  - path: '**/*.pdb'
+  - path: pdbs.7z
