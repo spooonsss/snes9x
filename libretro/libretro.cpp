@@ -1,3 +1,10 @@
+/* debugging notes:
+#define DEBUGGER=1 globally
+SA1.Flags |= TRACE_FLAG;
+CPU.Flags |= TRACE_FLAG;
+retro.dll!CPU.Flags |= 2
+*/
+
 #include "libretro.h"
 
 #include "snes9x.h"
@@ -1083,6 +1090,14 @@ bool retro_load_game(const struct retro_game_info *game)
 
     return rom_loaded;
 }
+
+#ifdef DEBUGGER
+void S9xTextMode(void) {
+}
+void S9xGraphicsMode(void) {
+}
+#endif
+
 
 static void remove_header(uint8_t *&romptr, size_t &romsize, bool multicart_sufami)
 {
